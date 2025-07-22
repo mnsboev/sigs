@@ -63,7 +63,7 @@ jobs:
       - name: Get Image Digest
         id: get-digest
         run: |
-              DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' my-image:latest)
+              DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.IMAGE_NAME }}:latest)
               echo "DIGEST=${DIGEST}" >> $GITHUB_ENV        
 
       - name: Generate artifact attestation
