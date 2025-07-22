@@ -1,4 +1,4 @@
 insecure-entitlements = ["security.insecure"]
 
 [registry."evidencetrial.jfrog.io"]
-  insecure = tr
+  insecure = true
