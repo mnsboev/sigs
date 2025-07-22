@@ -29,7 +29,7 @@ while IFS= read -r FILE_PATH || [[ -n "$FILE_PATH" ]]; do
     fi
 
     echo "::info Creating evidence for: $FILE_PATH"
-    OUTPUT=$(jf evd create --sigstore-bundle "$FILE_PATH" 2>&1)
+    OUTPUT=$(./jf evd create --sigstore-bundle $FILE_PATH 2>&1)
 
     if [ $? -eq 0 ]; then
         echo "::info Evidence created successfully for $FILE_PATH: $OUTPUT"
