@@ -1,5 +1,5 @@
 # Use the official lightweight Alpine image as the base
-FROM evidencetrial.jfrog.io/misha-docker/golang:alpine AS builder
+FROM evidencetrial.jfrog.io/misha-docker-docker/golang:alpine AS builder
 
 
 # Set the working directory inside the container
@@ -18,7 +18,7 @@ COPY src/ ./src/
 RUN go build -o main ./src/cmd/main.go
 
 # Use a minimal runtime image
-FROM evidencetrial.jfrog.io/misha-docker/alpine:latest
+FROM evidencetrial.jfrog.io/misha-docker-docker/alpine:latest
 
 
 # Set the working directory inside the runtime container

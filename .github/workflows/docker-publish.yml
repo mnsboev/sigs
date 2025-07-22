@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: evidencetrial.jfrog.io
-  IMAGE_NAME: misha-docker-local/sigs
+  IMAGE_NAME: misha-docker-docker-local/sigs
 
 jobs:
   build-and-push:
