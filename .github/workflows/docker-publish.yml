@@ -59,12 +59,12 @@ jobs:
           # Enable provenance and SBOM generation
           provenance: true
           sbom: true
+          outputs: |
+            image_digest=digest
       
       - name: Get Image Digest
-        id: get-digest
         run: |
-              DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest)
-              echo "DIGEST=${DIGEST}" >> $GITHUB_ENV        
+          echo "DIGEST=${{ steps.build.outputs.image_digest }}" >> $GITHUB_ENV  
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
