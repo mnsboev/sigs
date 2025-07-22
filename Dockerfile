@@ -1,5 +1,5 @@
 # Use the official lightweight Alpine image as the base
-FROM golang:alpine AS builder
+FROM evidencetrial.jfrog.io/local-oci-bug-hunt-a/alpine:v1.0 AS builder
 
 
 # Set the working directory inside the container
@@ -18,7 +18,7 @@ COPY src/ ./src/
 RUN go build -o main ./src/cmd/main.go
 
 # Use a minimal runtime image
-FROM alpine:latest
+FROM evidencetrial.jfrog.io/evidence-demo-docker-dev/hello-world-1.1:1.1
 
 # Set the working directory inside the runtime container
 WORKDIR /app
