@@ -1,9 +1,4 @@
 insecure-entitlements = ["security.insecure"]
-[registry."192.168.50.113:8082"]
-  http = true
 
-[registry."10.1.27.21:8082"]
-  http = true
-
-[registry."10.1.66.83:8082"]
-  http = true
+[registry."evidencetrial.jfrog.io"]
+  insecure = true

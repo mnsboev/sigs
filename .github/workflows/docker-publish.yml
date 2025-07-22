@@ -9,8 +9,8 @@ on:
       - main
 
 env:
-  REGISTRY: 192.168.1.2:8082
-  IMAGE_NAME: my-docker-local/sigs
+  REGISTRY: evidencetrial.jfrog.io
+  IMAGE_NAME: misha-docker-docker-local/sigs
 
 jobs:
   build-and-push:
@@ -34,8 +34,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: admin
-          password: password
+          username: ${{ secrets.user }}
+          password: ${{ secrets.password }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -53,7 +53,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Enable provenance and SBOM generation
@@ -61,8 +61,15 @@ jobs:
           sbom: true
 
       - name: Generate artifact attestation
-        if: github.event_name != 'pull_request'
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          subject-digest: ${{ steps.build-and-push.outputs.digest }}
+          subject-name: ${{ env.IMAGE_NAME }}/pr-1/list.manifest.json
+          subject-digest: sha256:31aee6a749e3a739be317bddcb145a2f9ffec98b8c357410862c9694b6a3df31
+      
+      - name: Create evidence from attestation
+        run: |
+          ./create_evidence.sh
+          
+
+          
+          
