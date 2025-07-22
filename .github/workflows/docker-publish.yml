@@ -64,7 +64,7 @@ jobs:
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ${{ env.IMAGE_NAME }}/pr-1/list.manifest.json
-          subject-digest: 31aee6a749e3a739be317bddcb145a2f9ffec98b8c357410862c9694b6a3df31
+          subject-digest: sha256:31aee6a749e3a739be317bddcb145a2f9ffec98b8c357410862c9694b6a3df31
       
       - name: Create evidence from attestation
         run: |
