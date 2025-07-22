@@ -27,13 +27,5 @@ while IFS= read -r FILE_PATH || [[ -n "$FILE_PATH" ]]; do
     if [[ -z "$FILE_PATH" ]]; then
         continue
     fi
-
-    echo "::info Creating evidence for: $FILE_PATH"
-    OUTPUT=$(./jf evd create --sigstore-bundle $FILE_PATH 2>&1)
-
-    if [ $? -eq 0 ]; then
-        echo "::info Evidence created successfully for $FILE_PATH: $OUTPUT"
-    else
-        echo "::warning Failed to create evidence for $FILE_PATH: $OUTPUT"
-    fi
+    ./jf evd create --sigstore-bundle $FILE_PATH
 done < "$ATTESTATION_PATHS_FILE"
