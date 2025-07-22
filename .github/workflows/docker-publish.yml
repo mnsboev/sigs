@@ -61,14 +61,12 @@ jobs:
           sbom: true
 
       - name: Generate artifact attestation
-        if: github.event_name != 'pull_request'
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ${{ env.IMAGE_NAME }}/${{ steps.build-and-push.outputs.digest }}/manifest.json
           subject-digest: ${{ steps.build-and-push.outputs.digest }}
       
       - name: Create evidence from attestation
-        if: github.event_name != 'pull_request'
         run: |
           ./create_evidence.sh
           
